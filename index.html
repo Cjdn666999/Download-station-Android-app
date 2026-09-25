@@ -3,249 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中考体育成绩查询</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react@18.0.0/umd/react.development.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.0.0/umd/react-dom.development.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@babel/standalone/babel.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>明心手表蓝牙连接问题与解决方法</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.8;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 960px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px 35px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+        
+        .section h2 {
+            font-size: 24px;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .section h3 {
+            font-size: 18px;
+            color: #764ba2;
+            margin: 20px 0 10px 0;
+        }
+        
+        .section p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        
+        .problem-list, .solution-list {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .problem-list li, .solution-list li {
+            margin-bottom: 10px;
+        }
+        
+        .solution-steps {
+            counter-reset: step;
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .solution-steps li {
+            counter-increment: step;
+            padding: 15px 15px 15px 60px;
+            margin-bottom: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+            position: relative;
+            border-left: 4px solid #667eea;
+        }
+        
+        .solution-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .tip-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .tip-box strong {
+            color: #e65100;
+        }
+        
+        .warning-box {
+            background: #fce4ec;
+            border-left: 4px solid #e91e63;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .warning-box strong {
+            color: #c62828;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: #cbd5e0;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+        }
+        
+        footer p {
+            margin-bottom: 8px;
+        }
+        
+        footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .section h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState } = React;
+    <header>
+        <h1>明心手表蓝牙连接问题与解决方法</h1>
+        <p>帮助您快速解决手表蓝牙未连接问题，恢复正常使用</p>
+    </header>
 
-        const App = () => {
-            const [currentPage, setCurrentPage] = useState('query');
-            const [name, setName] = useState('');
-            const [queryName, setQueryName] = useState('');
-            const [studentData, setStudentData] = useState(null);
+    <div class="container">
 
-            const studentDatabase = {
-                '倪钰翔': {
-                    id: '为了隐私问题 暂不显示',
-                    name: '倪钰翔',
-                    score800: 7.5,
-                    scoreJump: 14,
-                    scoreRope: 18.5,
-                    total: 38
-                },
-                '高梓玄': {
-                    id: '370481201012284237',
-                    name: '高梓玄',
-                    score800: 5,
-                    scoreJump: 4,
-                    scoreRope: 12.6,
-                    total: 22
-                },
-                '任衍硕': {
-                    id: '为了隐私问题 暂不显示',
-                    name: '任衍硕',
-                    score800: 9.9,
-                    scoreJump: 10,
-                    scoreRope: 15,
-                    total: 34.9
-                },
-                '李昊': {
-                    id: '为了隐私问题 暂不显示',
-                    name: '李昊',
-                    score800: '?',
-                    scoreJump: '?',
-                    scoreRope: '?',
-                    total: '太强了 不显示'
-                }
-            };
+        <!-- 问题介绍 -->
+        <div class="section">
+            <h2>问题介绍</h2>
+            <p>明心手表是一款智能穿戴设备，通过蓝牙与手机 App 配对后，可以实现消息通知、健康监测、运动记录等多种功能。然而，部分用户在使用过程中可能会遇到<strong>蓝牙未连接</strong>的问题，导致手表无法与手机正常通信，影响日常使用体验。</p>
+            <p>蓝牙未连接通常表现为：手表端显示"未连接"或蓝牙图标断开、手机 App 提示"设备离线"、消息通知无法同步、数据无法上传等。</p>
+        </div>
 
-            const handleQuery = () => {
-                setQueryName(name);
-                const data = studentDatabase[name] || {
-                    id: '为了隐私问题 暂不显示',
-                    name: name,
-                    score800: 'BigInt 404',
-                    scoreJump: 'BigInt 404',
-                    scoreRope: 'BigInt 404',
-                    total: 'BigInt 404'
-                };
-                setStudentData(data);
-                setCurrentPage('result');
-            };
+        <!-- 常见原因 -->
+        <div class="section">
+            <h2>常见原因</h2>
+            <p>明心手表蓝牙未连接可能由以下原因导致：</p>
+            <ul class="problem-list">
+                <li><strong>蓝牙未开启：</strong>手机或手表的蓝牙功能未打开，导致无法建立连接。</li>
+                <li><strong>距离过远：</strong>手表与手机之间的距离超出蓝牙有效范围（通常为 10 米以内），信号中断。</li>
+                <li><strong>配对信息失效：</strong>之前的配对记录被清除或损坏，需要重新配对。</li>
+                <li><strong>App 权限不足：</strong>手机 App 未获得蓝牙、定位等必要权限，导致无法正常连接。</li>
+                <li><strong>系统版本不兼容：</strong>手机操作系统或手表固件版本过旧，存在兼容性问题。</li>
+                <li><strong>蓝牙干扰：</strong>周围存在其他蓝牙设备或无线信号干扰，影响连接稳定性。</li>
+                <li><strong>手表电量不足：</strong>手表电量过低时，蓝牙模块可能自动关闭以节省电量。</li>
+                <li><strong>App 异常：</strong>手机 App 出现缓存异常、崩溃或版本过旧等问题。</li>
+            </ul>
+        </div>
 
-            const handleBack = () => {
-                setCurrentPage('query');
-                setName('');
-                setStudentData(null);
-            };
+        <!-- 解决方法 -->
+        <div class="section">
+            <h2>解决方法</h2>
+            <p>请按照以下步骤逐一排查，通常可以解决大部分蓝牙连接问题：</p>
+            
+            <ol class="solution-steps">
+                <li>
+                    <strong>检查蓝牙开关</strong><br>
+                    确保手机和手表的蓝牙功能均已开启。在手机设置中确认蓝牙处于打开状态，在手表设置中查看蓝牙连接状态。
+                </li>
+                <li>
+                    <strong>缩短设备距离</strong><br>
+                    将手表与手机靠近，保持在 1~3 米范围内，避免墙壁、金属物体等障碍物阻挡信号。
+                </li>
+                <li>
+                    <strong>重启设备</strong><br>
+                    依次重启手表和手机。先关闭手表电源，等待 10 秒后重新开机；同时重启手机，然后再次尝试连接。
+                </li>
+                <li>
+                    <strong>删除旧配对并重新配对</strong><br>
+                    在手机蓝牙设置中找到明心手表的配对记录，选择"忽略此设备"或"取消配对"。然后在手表端重新进入配对模式，通过手机 App 重新搜索并配对设备。
+                </li>
+                <li>
+                    <strong>检查 App 权限</strong><br>
+                    进入手机设置 → 应用管理 → 找到明心手表 App → 权限管理，确保已授予蓝牙、定位、通知等必要权限。特别是安卓系统，定位权限对蓝牙扫描是必需的。
+                </li>
+                <li>
+                    <strong>更新软件和固件</strong><br>
+                    检查手机 App 是否有新版本，前往应用商店更新到最新版。同时在 App 中检查手表固件是否有更新，如有请及时升级。
+                </li>
+                <li>
+                    <strong>为手表充电</strong><br>
+                    如果手表电量低于 20%，请先为手表充电至 50% 以上，再尝试连接蓝牙。
+                </li>
+                <li>
+                    <strong>清除 App 缓存</strong><br>
+                    进入手机设置 → 应用管理 → 明心手表 App → 存储，点击"清除缓存"（注意不要清除数据，以免丢失历史记录）。然后重新打开 App 尝试连接。
+                </li>
+                <li>
+                    <strong>关闭其他蓝牙设备</strong><br>
+                    暂时关闭周围其他正在使用的蓝牙设备（如蓝牙耳机、音箱等），减少信号干扰，再尝试连接手表。
+                </li>
+                <li>
+                    <strong>恢复出厂设置</strong><br>
+                    如果以上方法均无效，可以在手表设置中选择"恢复出厂设置"，然后重新与手机配对。注意：此操作会清除手表中的所有数据，请谨慎操作。
+                </li>
+            </ol>
+        </div>
 
-            if (currentPage === 'query') {
-                return (
-                    <div className="min-h-screen bg-gray-100">
-                        {/* 蓝色顶部标题栏 */}
-                        <div className="bg-blue-600 text-white py-8 px-4">
-                            <h1 className="text-2xl font-bold text-center">
-                                滕州市2026年中考体育与健康成绩查询
-                            </h1>
-                        </div>
+        <!-- 注意事项 -->
+        <div class="section">
+            <h2>注意事项</h2>
+            
+            <div class="tip-box">
+                <strong> 温馨提示：</strong>建议将明心手表 App 设置为后台常驻，避免被手机系统自动清理，这样可以保持蓝牙连接的稳定性。
+            </div>
+            
+            <div class="warning-box">
+                <strong>️ 重要提醒：</strong>请勿在手机蓝牙设置中直接点击连接手表，而应通过明心手表 App 进行配对和连接，否则可能导致连接异常或功能受限。
+            </div>
+            
+            <p>如果完成以上所有步骤后仍然无法连接，可能是手表蓝牙模块存在硬件故障，建议联系官方售后进行检测和维修。</p>
+        </div>
 
-                        {/* 查询表单 */}
-                        <div className="max-w-md mx-auto mt-8 px-4">
-                            <p className="text-gray-700 mb-6 text-center">请输入正确的查询条件进行查询</p>
-                            
-                            <div className="space-y-4">
-                                {/* 身份证号输入框（模糊处理） */}
-                                <div className="relative">
-                                    <input 
-                                        type="text" 
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-200"
-                                        placeholder=""
-                                        disabled
-                                    />
-                                    <div className="absolute inset-0 flex items-center px-4">
-                                        <div className="w-full h-6 bg-gray-400 rounded"></div>
-                                    </div>
-                                </div>
+    </div>
 
-                                {/* 姓名输入框 */}
-                                <div>
-                                    <label className="block text-gray-700 mb-2 font-medium">姓名</label>
-                                    <input 
-                                        type="text" 
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                        placeholder="请输入姓名"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                    />
-                                </div>
+    <!-- 页脚联系方式 -->
+    <footer>
+        <p>如有任何问题，欢迎通过以下方式联系我们</p>
+        <p> 联系邮箱：<a href="mailto:669931540@qq.com">669931540@qq.com</a></p>
+        <p style="margin-top: 15px; font-size: 14px; opacity: 0.7;"> 2026 明心手表技术支持. 保留所有权利.</p>
+    </footer>
 
-                                {/* 查询按钮 */}
-                                <button 
-                                    onClick={handleQuery}
-                                    className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
-                                >
-                                    查询
-                                </button>
-                            </div>
-
-                            {/* 查询必读 */}
-                            <div className="mt-8 text-center">
-                                <p className="text-gray-600">查询必读</p>
-                            </div>
-                        </div>
-
-                        {/* 底部导航 */}
-                        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3">
-                            <div className="flex justify-center space-x-6 text-blue-500">
-                                <span>分享好友</span>
-                                <span>我的保存</span>
-                                <span>订阅通知</span>
-                            </div>
-                            <div className="text-center mt-2 text-gray-500 text-sm">
-                                本查询使用 <span className="text-blue-500">易查分</span> 制作，免费制作查询 &gt;
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-
-            return (
-                <div className="min-h-screen bg-gray-100">
-                    {/* 查询结果页面 */}
-                    <div className="max-w-md mx-auto mt-8 px-4">
-                        <h2 className="text-2xl font-bold text-center mb-6">查询结果</h2>
-                        
-                        {/* 成绩表格 */}
-                        <div className="bg-white rounded-lg shadow overflow-hidden">
-                            <table className="w-full">
-                                <tbody>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">身份证号</td>
-                                        <td className="px-4 py-3">{studentData.id}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">姓名</td>
-                                        <td className="px-4 py-3">{studentData.name}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">800米/1000米</td>
-                                        <td className="px-4 py-3">{studentData.score800}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">立定跳远</td>
-                                        <td className="px-4 py-3">{studentData.scoreJump}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">实心球成绩</td>
-                                        <td className="px-4 py-3">0</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">跳绳成绩</td>
-                                        <td className="px-4 py-3">{studentData.scoreRope}</td>
-                                    </tr>
-                                    <tr className="border-b">
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">篮球运球</td>
-                                        <td className="px-4 py-3">0</td>
-                                    </tr>
-                                    <tr>
-                                        <td className="px-4 py-3 bg-blue-50 font-medium">总分</td>
-                                        <td className="px-4 py-3 font-bold">{studentData.total}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        {/* 联系我们 */}
-                        <div className="mt-6 text-center">
-                            <p className="text-blue-500">对查询结果有疑问请联系我们</p>
-                        </div>
-
-                        {/* 公众号二维码 */}
-                        <div className="mt-6 bg-gray-100 rounded-lg p-6 text-center">
-                            <h3 className="font-medium mb-2">长按关注查询公众号</h3>
-                            <p className="text-gray-600 text-sm mb-4">快速进入查询 保存结果 接收通知</p>
-                            <div className="flex justify-center">
-                                <img 
-                                    src="https://placehold.co/120x120/000000/FFFFFF?text=QR" 
-                                    alt="微信公众号二维码" 
-                                    className="w-30 h-30"
-                                />
-                            </div>
-                        </div>
-
-                        {/* 返回按钮 */}
-                        <div className="mt-8 text-center">
-                            <button 
-                                onClick={handleBack}
-                                className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-lg transition duration-200"
-                            >
-                                点击返回到查询页面
-                            </button>
-                        </div>
-
-                        {/* 底部导航 */}
-                        <div className="mt-8 flex justify-between items-center">
-                            <div className="flex items-center space-x-2">
-                                <i className="fas fa-lock text-gray-600"></i>
-                                <span className="text-gray-600">锁定</span>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                                <i className="fas fa-share text-gray-600"></i>
-                                <span className="text-gray-600">分享</span>
-                            </div>
-                            <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-                                保存
-                            </button>
-                        </div>
-
-                        {/* 底部信息 */}
-                        <div className="mt-4 text-center text-blue-500">
-                            发成绩用易查分 &gt;
-                        </div>
-                    </div>
-                </div>
-            );
-        };
-
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
 </body>
 </html>
